@@ -80,7 +80,7 @@ public class MobileController {
 	@ApiOperation(value = "Delete Mobile", notes = "This REST API delete's the Mobile")
 	public HttpStatus deleteMobileById(@PathVariable int mobileId) {
 		logger.info("Displays all the mobile details");
-		this.mobileService.deleteMobileId1(mobileId);
+		this.mobileService.deleteMobileId(mobileId);
 		return HttpStatus.OK;
 	}
 

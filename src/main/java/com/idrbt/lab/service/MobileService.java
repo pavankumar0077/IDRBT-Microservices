@@ -15,7 +15,7 @@ public interface MobileService {
 	
 	Mobile getProductById(int mobileId);
 	
-	void deleteMobileId1(int mobileId);
+	void deleteMobileId(int mobileId);
 	
 //	public boolean deleteAllMobileDetails();
 //	public boolean deleteMobileId(int mobileId);
