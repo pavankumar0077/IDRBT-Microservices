@@ -1,6 +1,10 @@
 package com.idrbt.lab.dto;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.idrbt.lab.controller.MobileController;
 
 //import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,6 +14,7 @@ import jakarta.persistence.Id;
 
 @Document(collection = "mobileDB")
 public class Mobile {
+	
 	@ApiModelProperty(value = "Mobile identifier")
 	private int id;
 	

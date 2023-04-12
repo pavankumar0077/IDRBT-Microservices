@@ -3,8 +3,9 @@ package com.idrbt.lab.controller;
 import java.util.List;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;	
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,6 @@ import com.idrbt.lab.service.MobileService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
-
 @RestController
 @RequestMapping("/api")
 public class MobileController {
@@ -31,18 +31,8 @@ public class MobileController {
 	@Autowired
 	MobileService mobileService;
 
-	private final Logger logger = LoggerFactory.getLogger(MobileController.class);
-	
-//	@GetMapping("/products")
-//	public ResponseEntity<List<Product>> getAllProduct() {
-//		LOGGER.info("Display all the products");
-//		LOGGER.debug("Display all the products");
-//		LOGGER.info("Display all the products");
-//		LOGGER.warn("Display all the products");
-//		LOGGER.error("Display all the products");
-//
-//		return ResponseEntity.ok().body(productService.getAllProduct());
-//	}
+    final Logger logger = LoggerFactory.getLogger(MobileController.class);
+    
 
 	@GetMapping(value = "/mobile", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Reads all Mobiles", notes = "This REST API return list of all Mobiles")
@@ -55,14 +45,14 @@ public class MobileController {
 	@ApiOperation(value = "Reads Mobiles by Id", notes = "This REST API returns Mobile by Id")
 	public ResponseEntity<Mobile> getMobileById(
 			@ApiParam(value = "Mobile id", name = "id") @PathVariable int mobileId) {
-		logger.info("Displays all the mobile details");
+		logger.info("Displays mobile details of particular mobile id");
 		return ResponseEntity.ok().body(mobileService.getProductById(mobileId));
 
 	}
 
 	@PostMapping("/mobile")
 	public ResponseEntity<Mobile> createProduct(@RequestBody Mobile mobile) {
-		logger.info("Product is uploaded");
+		logger.info("mobile details uploaded on mongodb");
 		return ResponseEntity.ok().body(this.mobileService.createNewMobile(mobile));
 	}
 
@@ -72,14 +62,14 @@ public class MobileController {
 	@ApiOperation(value = "ediitng a Mobilec", notes = "edit a Mobile")
 	public ResponseEntity<Mobile> updateMobile(@PathVariable int mobileId, @RequestBody Mobile mobile) {
 		mobile.setId(mobileId);
-		logger.info("Change the details of particular product");
+		logger.info("Change mobile details of particular mobile id");
 		return ResponseEntity.ok().body(this.mobileService.updateMobile(mobile));
 	}
 
 	@DeleteMapping(value = "/mobile/{id}")
 	@ApiOperation(value = "Delete Mobile", notes = "This REST API delete's the Mobile")
 	public HttpStatus deleteMobileById(@PathVariable int mobileId) {
-		logger.info("Displays all the mobile details");
+		logger.info("Delete mobile details of particular mobile id");
 		this.mobileService.deleteMobileId(mobileId);
 		return HttpStatus.OK;
 	}
