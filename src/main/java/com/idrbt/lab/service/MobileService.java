@@ -17,6 +17,11 @@ public interface MobileService {
 	
 	void deleteMobileId(int mobileId);
 	
+	
+//	Redis Cache methods
+	public List<Mobile> fetchAllMobiles();
+	public boolean saveMobile(Mobile mobile);
+	
 //	public boolean deleteAllMobileDetails();
 //	public boolean deleteMobileId(int mobileId);
 //	public Mobile updateMobile(int mobileId, Mobile updatedMobile);

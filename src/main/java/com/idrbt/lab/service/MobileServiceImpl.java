@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import com.idrbt.lab.controller.MobileController;
 import com.idrbt.lab.dto.Mobile;
 import com.idrbt.lab.exception.ResourceNotFoundException;
 import com.idrbt.lab.repository.MobileRepository;
@@ -16,19 +16,27 @@ import com.idrbt.lab.repository.MobileRepository;
 @Service
 public class MobileServiceImpl implements MobileService {
 
+	Mobile mobile;
+
 	@Autowired
 	MobileRepository mobileRepository;
+
+	@Autowired
+	private RedisTemplate redisTemplate;
+
+	private static final String KEY = "MOBILE";
 
 	final Logger logger = LoggerFactory.getLogger(MobileServiceImpl.class);
 
 	@Override
 	public Mobile createNewMobile(Mobile mobile) {
+		logger.info("New mobile details implementation");
 		return mobileRepository.save(mobile);
 	}
 
 	@Override
 	public Mobile updateMobile(Mobile mobile) {
-		logger.info("Update mobile details service implemention");
+		logger.info("Update mobile details service implementation");
 		Optional<Mobile> mobileDb = this.mobileRepository.findById(mobile.getId());
 
 		if (mobileDb.isPresent()) {
@@ -45,7 +53,7 @@ public class MobileServiceImpl implements MobileService {
 
 	@Override
 	public List<Mobile> getAllProduct() {
-		logger.info("Mobile service implemention to get all the mobile details");
+		logger.info("Mobile service implementation to get all the mobile details");
 		return this.mobileRepository.findAll();
 
 	}
@@ -53,7 +61,7 @@ public class MobileServiceImpl implements MobileService {
 	@Override
 	public Mobile getProductById(int mobileId) {
 		Optional<Mobile> mobileDb = this.mobileRepository.findById(mobileId);
-		logger.info("Mobile service implemention to get mobile details for a particular mobile id");
+		logger.info("Mobile service implementation to get mobile details for a particular mobile id");
 
 		if (mobileDb.isPresent()) {
 			return mobileDb.get();
@@ -64,7 +72,7 @@ public class MobileServiceImpl implements MobileService {
 
 	@Override
 	public void deleteMobileId(int mobileId) {
-		logger.info("Mobile service implemention to delete mobile details for a particular mobile id");
+		logger.info("Mobile service implementation to delete mobile details for a particular mobile id");
 
 		Optional<Mobile> mobileDb = this.mobileRepository.findById(mobileId);
 		if (mobileDb.isPresent()) {
@@ -74,5 +82,31 @@ public class MobileServiceImpl implements MobileService {
 		}
 
 	}
+	
+//	Redis cache impl
+
+	@Override
+	public List<Mobile> fetchAllMobiles() {
+		List<Mobile> mobile;
+		mobile = redisTemplate.opsForHash().values(KEY);
+        return  mobile;
+	}
+
+	@Override
+	public boolean saveMobile(Mobile mobile) {
+		try {
+            redisTemplate.opsForHash().put(KEY, mobile.getId(), mobile);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+	}
+
+
+
+	
+
+	
 
 }

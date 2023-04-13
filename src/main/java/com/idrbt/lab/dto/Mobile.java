@@ -1,30 +1,25 @@
 package com.idrbt.lab.dto;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.Serializable;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.idrbt.lab.controller.MobileController;
-
-//import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Document(collection = "mobileDB")
-public class Mobile {
-	
-	@ApiModelProperty(value = "Mobile identifier")
+public class Mobile implements Serializable {
+
+//	@ApiModelProperty(value = "Mobile identifier")
+	@Schema(accessMode = Schema.AccessMode.READ_ONLY)
 	private int id;
-	
-	@ApiModelProperty(value = "Mobile name")
+
+//	@ApiModelProperty(value = "Mobile name")
 	private String name;
-	
-	@ApiModelProperty(value = "Mobile txn_status")
+
+//	@ApiModelProperty(value = "Mobile txn_status")
 	private String txn_status;
-	
-	@ApiModelProperty(value = "Mobile message")
+
+//	@ApiModelProperty(value = "Mobile message")
 	private String message;
 
 	public Mobile() {
@@ -75,7 +70,9 @@ public class Mobile {
 	public String toString() {
 		return "Mobile [id=" + id + ", name=" + name + ", txn_status=" + txn_status + ", message=" + message + "]";
 	}
-	
-	
+
+//	public String toStringMobile() {
+//		return "Mobile [id=" + id + ", name=" + name + ", txn_status=" + txn_status + ", message=" + message + "]";
+//	}
 
 }
