@@ -9,17 +9,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Document(collection = "mobileDB")
 public class Mobile implements Serializable {
 
-//	@ApiModelProperty(value = "Mobile identifier")
+
 	@Schema(accessMode = Schema.AccessMode.READ_ONLY)
 	private int id;
 
-//	@ApiModelProperty(value = "Mobile name")
+
 	private String name;
 
-//	@ApiModelProperty(value = "Mobile txn_status")
+
 	private String txn_status;
 
-//	@ApiModelProperty(value = "Mobile message")
+
 	private String message;
 
 	public Mobile() {
