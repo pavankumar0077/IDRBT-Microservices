@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.idrbt.lab.dto.Mobile;
 import com.idrbt.lab.service.MobileService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -36,32 +37,28 @@ public class MobileController {
 
 	final Logger logger = LoggerFactory.getLogger(MobileController.class);
 
-	
 	@Operation(summary = "Retrieve all mobile details", tags = { "mobiles", "get", "filter" })
-	  @ApiResponses({
-	      @ApiResponse(responseCode = "200", content = {
-	          @Content(schema = @Schema(implementation = Mobile.class), mediaType = "application/json") }),
-	      @ApiResponse(responseCode = "204", description = "There are no mobile details", content = {
-	          @Content(schema = @Schema()) }),
-	      @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
+	@ApiResponses({
+			@ApiResponse(responseCode = "200", content = {
+					@Content(schema = @Schema(implementation = Mobile.class), mediaType = "application/json") }),
+			@ApiResponse(responseCode = "204", description = "There are no mobile details", content = {
+					@Content(schema = @Schema()) }),
+			@ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
 	@GetMapping(value = "/mobile", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Mobile>> getAllMobiles() {
 		logger.info("Displays all the mobile details");
 		return ResponseEntity.ok().body(mobileService.getAllProduct());
 	}
 
-	
-	 @Operation(
-		      summary = "Retrieve a mobile by Id",
-		      description = "Get a mobile object by specifying its id. The response is mobile object with id, title, description and published status.",
-		      tags = { "mobiles", "get" })
-		  @ApiResponses({
-		      @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = Mobile.class), mediaType = "application/json") }),
-		      @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
-		      @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
+	@Operation(summary = "Retrieve a mobile by Id", description = "Get a mobile object by specifying its id. The response is mobile object with id, title, description and published status.", tags = {
+			"mobiles", "get" })
+	@ApiResponses({
+			@ApiResponse(responseCode = "200", content = {
+					@Content(schema = @Schema(implementation = Mobile.class), mediaType = "application/json") }),
+			@ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
+			@ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
 	@GetMapping(value = "/mobile/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Mobile> getMobileById(
-			@PathVariable int mobileId) {
+	public ResponseEntity<Mobile> getMobileById(@PathVariable int mobileId) {
 		logger.info("Displays mobile details of particular mobile id");
 		return ResponseEntity.ok().body(mobileService.getProductById(mobileId));
 
@@ -79,17 +76,13 @@ public class MobileController {
 		return ResponseEntity.ok().body(this.mobileService.createNewMobile(mobile));
 	}
 
-	
-	
-	
-	@Operation(
-		      summary = "Update a mobile",
-		      description = "update a mobile details. The response is mobile object with id, mobile status",
-		      tags = { "mobiles", "get" })
-		  @ApiResponses({
-		      @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = Mobile.class), mediaType = "application/json") }),
-		      @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
-		      @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
+	@Operation(summary = "Update a mobile", description = "update a mobile details. The response is mobile object with id, mobile status", tags = {
+			"mobiles", "get" })
+	@ApiResponses({
+			@ApiResponse(responseCode = "200", content = {
+					@Content(schema = @Schema(implementation = Mobile.class), mediaType = "application/json") }),
+			@ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
+			@ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
 	@PutMapping(value = "/mobile/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
@@ -99,10 +92,9 @@ public class MobileController {
 		return ResponseEntity.ok().body(this.mobileService.updateMobile(mobile));
 	}
 
-	
 	@Operation(summary = "delete a mobile by Id", tags = { "mobiles", "delete" })
-	  @ApiResponses({ @ApiResponse(responseCode = "204", content = { @Content(schema = @Schema()) }),
-	      @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
+	@ApiResponses({ @ApiResponse(responseCode = "204", content = { @Content(schema = @Schema()) }),
+			@ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
 	@DeleteMapping(value = "/mobile/{id}")
 	public HttpStatus deleteMobileById(@PathVariable int mobileId) {
 		logger.info("Delete mobile details of particular mobile id");
@@ -117,7 +109,6 @@ public class MobileController {
 //		return mobileService.deleteAllMobileDetails();
 //	}
 
-	
 	@Operation(summary = "Create a new mobile in redis cache server", tags = { "mobiles", "post" })
 	@ApiResponses({
 			@ApiResponse(responseCode = "201", content = {
@@ -133,15 +124,13 @@ public class MobileController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 
-	
-	@Operation(
-		      summary = "Retrieve a mobile by Id by using Redis cache server",
-		      description = "Get a mobile object by specifying its id. The response is mobile object with id, title, description and published status.",
-		      tags = { "mobiles", "get" })
-		  @ApiResponses({
-		      @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = Mobile.class), mediaType = "application/json") }),
-		      @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
-		      @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
+	@Operation(summary = "Retrieve a mobile by Id by using Redis cache server", description = "Get a mobile object by specifying its id. The response is mobile object with id, title, description and published status.", tags = {
+			"mobiles", "get" })
+	@ApiResponses({
+			@ApiResponse(responseCode = "200", content = {
+					@Content(schema = @Schema(implementation = Mobile.class), mediaType = "application/json") }),
+			@ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
+			@ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
 	@GetMapping("/mobile/redis")
 	public ResponseEntity<List<Mobile>> fetchAllMobiles() {
 		logger.info("Fetch all the mobile details from the redis cache server");
@@ -150,11 +139,7 @@ public class MobileController {
 		return ResponseEntity.ok(mobile);
 	}
 
-	
-	@Operation(
-		      summary = "Sample message",
-		      description = "Sample dispense messsage",
-		      tags = { "mobiles", "get" })
+	@Operation(summary = "Sample message", description = "Sample dispense messsage", tags = { "mobiles", "get" })
 	@GetMapping("/mobile/msg")
 	public String showDispenseMessage() {
 		logger.info("Sample dispense message");

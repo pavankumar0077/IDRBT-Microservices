@@ -2,23 +2,31 @@ package com.idrbt.lab.dto;
 
 import java.io.Serializable;
 
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Document(collection = "mobileDB")
 public class Mobile implements Serializable {
 
+//	@Transient
+//	public static final String SEQUENCE_NAME = "user_sequence";
 
-	@Schema(accessMode = Schema.AccessMode.READ_ONLY)
+//	@Schema(accessMode = Schema.AccessMode.READ_ONLY)
+	@Id
 	private int id;
 
+	private double amount;
 
-	private String name;
-
+	@NotBlank
+	@Size(max = 100)
+	@Indexed(unique = true)
+	private String account;
 
 	private String txn_status;
-
 
 	private String message;
 
@@ -26,10 +34,11 @@ public class Mobile implements Serializable {
 		super();
 	}
 
-	public Mobile(int id, String name, String txn_status, String message) {
+	public Mobile(int id, double amount, @NotBlank @Size(max = 100) String account, String txn_status, String message) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.amount = amount;
+		this.account = account;
 		this.txn_status = txn_status;
 		this.message = message;
 	}
@@ -42,12 +51,20 @@ public class Mobile implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public double getAmount() {
+		return amount;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 	public String getTxn_status() {
@@ -68,11 +85,8 @@ public class Mobile implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Mobile [id=" + id + ", name=" + name + ", txn_status=" + txn_status + ", message=" + message + "]";
+		return "Mobile [id=" + id + ", amount=" + amount + ", account=" + account + ", txn_status=" + txn_status
+				+ ", message=" + message + "]";
 	}
-
-//	public String toStringMobile() {
-//		return "Mobile [id=" + id + ", name=" + name + ", txn_status=" + txn_status + ", message=" + message + "]";
-//	}
 
 }

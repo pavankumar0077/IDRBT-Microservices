@@ -42,7 +42,8 @@ public class MobileServiceImpl implements MobileService {
 		if (mobileDb.isPresent()) {
 			Mobile mobileUpdate = mobileDb.get();
 			mobileUpdate.setId(mobile.getId());
-			mobileUpdate.setName(mobile.getName());
+			mobileUpdate.setAmount(mobile.getAmount());
+			mobileUpdate.setAccount(mobile.getAccount());
 			mobileUpdate.setTxn_status(mobile.getTxn_status());
 			mobileUpdate.setMessage(mobile.getMessage());
 			return mobileUpdate;
@@ -82,31 +83,25 @@ public class MobileServiceImpl implements MobileService {
 		}
 
 	}
-	
+
 //	Redis cache impl
 
 	@Override
 	public List<Mobile> fetchAllMobiles() {
 		List<Mobile> mobile;
 		mobile = redisTemplate.opsForHash().values(KEY);
-        return  mobile;
+		return mobile;
 	}
 
 	@Override
 	public boolean saveMobile(Mobile mobile) {
 		try {
-            redisTemplate.opsForHash().put(KEY, mobile.getId(), mobile);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+			redisTemplate.opsForHash().put(KEY, mobile.getId(), mobile);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
-
-
-
-	
-
-	
 
 }
