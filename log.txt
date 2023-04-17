@@ -1742,3 +1742,50 @@ Consider defining a bean of type 'springfox.documentation.spring.web.Documentati
 2023-04-13T16:26:02.733+05:30  INFO 2680314 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2023-04-13T16:26:02.733+05:30  INFO 2680314 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2023-04-13T16:26:02.734+05:30  INFO 2680314 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-04-13T16:34:18.274+05:30  INFO 2680314 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-04-13T16:34:18.275+05:30  INFO 2680314 --- [RMI TCP Connection(2)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-04-13T16:34:18.276+05:30  INFO 2680314 --- [RMI TCP Connection(2)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-04-13T16:34:18.277+05:30  WARN 2680314 --- [RMI TCP Connection(2)-127.0.0.1] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [lettuce-nioEventLoop-6-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.6/sun.nio.ch.EPoll.wait(Native Method)
+ java.base@17.0.6/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:118)
+ java.base@17.0.6/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:129)
+ java.base@17.0.6/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:146)
+ app//io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:68)
+ app//io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:879)
+ app//io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:526)
+ app//io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+ app//io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+ app//io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+ java.base@17.0.6/java.lang.Thread.run(Thread.java:833)
+2023-04-13T16:34:18.277+05:30  WARN 2680314 --- [RMI TCP Connection(2)-127.0.0.1] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [lettuce-eventExecutorLoop-4-2] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.6/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@17.0.6/java.util.concurrent.locks.LockSupport.park(LockSupport.java:341)
+ java.base@17.0.6/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block(AbstractQueuedSynchronizer.java:506)
+ java.base@17.0.6/java.util.concurrent.ForkJoinPool.unmanagedBlock(ForkJoinPool.java:3463)
+ java.base@17.0.6/java.util.concurrent.ForkJoinPool.managedBlock(ForkJoinPool.java:3434)
+ java.base@17.0.6/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1623)
+ java.base@17.0.6/java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:435)
+ app//io.netty.util.concurrent.SingleThreadEventExecutor.takeTask(SingleThreadEventExecutor.java:244)
+ app//io.netty.util.concurrent.DefaultEventExecutor.run(DefaultEventExecutor.java:64)
+ app//io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+ app//io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+ app//io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+ java.base@17.0.6/java.lang.Thread.run(Thread.java:833)
+2023-04-13T16:34:18.277+05:30  WARN 2680314 --- [RMI TCP Connection(2)-127.0.0.1] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [lettuce-eventExecutorLoop-4-3] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.6/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@17.0.6/java.util.concurrent.locks.LockSupport.park(LockSupport.java:341)
+ java.base@17.0.6/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block(AbstractQueuedSynchronizer.java:506)
+ java.base@17.0.6/java.util.concurrent.ForkJoinPool.unmanagedBlock(ForkJoinPool.java:3463)
+ java.base@17.0.6/java.util.concurrent.ForkJoinPool.managedBlock(ForkJoinPool.java:3434)
+ java.base@17.0.6/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1623)
+ java.base@17.0.6/java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:435)
+ app//io.netty.util.concurrent.SingleThreadEventExecutor.takeTask(SingleThreadEventExecutor.java:244)
+ app//io.netty.util.concurrent.DefaultEventExecutor.run(DefaultEventExecutor.java:64)
+ app//io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+ app//io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+ app//io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+ java.base@17.0.6/java.lang.Thread.run(Thread.java:833)
+2023-04-13T16:34:18.279+05:30  INFO 2680314 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-13T16:34:18.480+05:30  WARN 2680314 --- [RMI TCP Connection(2)-127.0.0.1] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
+2023-04-13T16:34:18.587+05:30  INFO 2680314 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2023-04-13T16:34:18.587+05:30  INFO 2680314 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.

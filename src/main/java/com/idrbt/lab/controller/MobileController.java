@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.idrbt.lab.dto.Mobile;
 import com.idrbt.lab.service.MobileService;
-
-//import io.swagger.annotations.ApiOperation;
-//import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -128,6 +125,7 @@ public class MobileController {
 			@ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
 	@PostMapping("/mobile/redis")
 	public ResponseEntity<String> saveMobile(@RequestBody Mobile mobile) {
+		logger.info("Saving mobile details in redis cache server");
 		boolean result = mobileService.saveMobile(mobile);
 		if (result)
 			return ResponseEntity.ok("User Created Successfully!!");
@@ -146,6 +144,7 @@ public class MobileController {
 		      @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
 	@GetMapping("/mobile/redis")
 	public ResponseEntity<List<Mobile>> fetchAllMobiles() {
+		logger.info("Fetch all the mobile details from the redis cache server");
 		List<Mobile> mobile;
 		mobile = mobileService.fetchAllMobiles();
 		return ResponseEntity.ok(mobile);
@@ -158,6 +157,7 @@ public class MobileController {
 		      tags = { "mobiles", "get" })
 	@GetMapping("/mobile/msg")
 	public String showDispenseMessage() {
+		logger.info("Sample dispense message");
 		return "Amount credited to your account 089787XXX";
 
 	}
