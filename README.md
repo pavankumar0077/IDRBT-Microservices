@@ -12,6 +12,7 @@ Install Java on Ubuntu
   sudo apt update
   sudo apt install default-jre
   javac -version
+  Reference link:https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-22-04
 ```
 Install Eclipse on Ubuntu
 
@@ -35,6 +36,7 @@ Install MongoDB on Ubuntu
   sudo systemctl status mongod
   sudo systemctl enable mongod
   mongo --eval 'db.runCommand({ connectionStatus: 1 })'
+  Reference link:https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04
 ```
 Install MongoDB Compass on Ubuntu
 
@@ -43,6 +45,7 @@ Install MongoDB Compass on Ubuntu
   sudo apt install ./mongodb-compass_1.28.4_amd64.deb
   sudo dnf install -y https://downloads.mongodb.com/compass/mongodb-compass-1.26.1.x86_64.rpm
   mongodb-compass
+  Reference link:https://www.digitalocean.com/community/tutorials/how-to-use-mongodb-compass
 ```
 ## Git Clone
 
