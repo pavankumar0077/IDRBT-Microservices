@@ -2,18 +2,22 @@ package com.idrbt.lab.dto;
 
 import java.io.Serializable;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+
+
 
 @Document(collection = "mobileDB")
 public class Mobile implements Serializable {
 
-//	@Transient
-//	public static final String SEQUENCE_NAME = "user_sequence";
+	@Transient
+	public static final String SEQUENCE_NAME = "user_sequence";
 
 //	@Schema(accessMode = Schema.AccessMode.READ_ONLY)
 	@Id

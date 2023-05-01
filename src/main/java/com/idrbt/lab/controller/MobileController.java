@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.idrbt.lab.dto.Mobile;
 import com.idrbt.lab.service.MobileService;
+import com.idrbt.lab.service.SequenceGeneratorService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -45,6 +46,9 @@ public class MobileController {
 
 	@Autowired
 	private LogFile logFile;
+	
+	@Autowired
+	private SequenceGeneratorService sequenceGeneratorService;
 
 	final Logger logger = LoggerFactory.getLogger(MobileController.class);
 
@@ -57,7 +61,7 @@ public class MobileController {
 			@ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
 	@GetMapping(value = "/mobile", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Mobile>> getAllMobiles() {
-		logger.info("Displays all the mobile details");
+		logger.info("Successful payment");
 		return ResponseEntity.ok().body(mobileService.getAllProduct());
 	}
 
@@ -75,6 +79,12 @@ public class MobileController {
 
 	}
 
+//	@PostMapping("/employees")
+//    public Employee createEmployee(@Valid @RequestBody Employee employee) {
+//        employee.setId(sequenceGeneratorService.generateSequence(Employee.SEQUENCE_NAME));
+//        return employeeRepository.save(employee);
+//    }
+
 	// Swagger 3 doc
 	@Operation(summary = "Create a new mobile", tags = { "mobiles", "post" })
 	@ApiResponses({
@@ -83,9 +93,16 @@ public class MobileController {
 			@ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
 	@PostMapping("/mobile")
 	public ResponseEntity<Mobile> createProduct(@RequestBody Mobile mobile) {
-		logger.info("mobile details uploaded on mongodb");
+		mobile.setId(sequenceGeneratorService.generateSequence(Mobile.SEQUENCE_NAME));
+		logger.info("Transaction is in progress");
 		return ResponseEntity.ok().body(this.mobileService.createNewMobile(mobile));
+
 	}
+
+//	public ResponseEntity<Mobile> createProduct(@RequestBody Mobile mobile) {
+//		logger.info("mobile details uploaded on mongodb");
+//		return ResponseEntity.ok().body(this.mobileService.createNewMobile(mobile));
+//	}
 
 	@Operation(summary = "Update a mobile", description = "update a mobile details. The response is mobile object with id, mobile status", tags = {
 			"mobiles", "get" })

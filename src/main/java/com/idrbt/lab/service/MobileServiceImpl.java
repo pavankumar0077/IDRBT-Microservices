@@ -30,7 +30,7 @@ public class MobileServiceImpl implements MobileService {
 
 	@Override
 	public Mobile createNewMobile(Mobile mobile) {
-		logger.info("New mobile details implementation");
+		logger.info("Transaction successful");
 		return mobileRepository.save(mobile);
 	}
 
