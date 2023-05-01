@@ -1,10 +1,18 @@
 package com.idrbt.lab.controller;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.logging.LogFile;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +42,9 @@ public class MobileController {
 
 	@Autowired
 	MobileService mobileService;
+
+	@Autowired
+	private LogFile logFile;
 
 	final Logger logger = LoggerFactory.getLogger(MobileController.class);
 
@@ -145,6 +156,29 @@ public class MobileController {
 		logger.info("Sample dispense message");
 		return "Amount credited to your account 089787XXX";
 
+	}
+
+	@GetMapping("/logs")
+	public ResponseEntity<Resource> getLogFile() {
+		try {
+			Path logFilePath = Paths.get("log.txt").toAbsolutePath().normalize();
+			Resource resource = new UrlResource(logFilePath.toUri());
+
+			if (resource.exists()) {
+				return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+						"attachment; filename=\"" + resource.getFilename() + "\"").body(resource);
+			} else {
+				return ResponseEntity.notFound().build();
+			}
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
+	}
+
+	@GetMapping("/logging")
+	public ResponseEntity<Resource> getLogs() throws IOException {
+		Resource resource = new FileSystemResource(logFile.toString());
+		return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/octet-stream")).body(resource);
 	}
 
 }
