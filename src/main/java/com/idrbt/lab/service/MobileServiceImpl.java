@@ -30,7 +30,7 @@ public class MobileServiceImpl implements MobileService {
 
 	@Override
 	public Mobile createNewMobile(Mobile mobile) {
-		logger.info("Transaction successful");
+		logger.info("Updated transaction to Database");
 		return mobileRepository.save(mobile);
 	}
 
@@ -54,7 +54,7 @@ public class MobileServiceImpl implements MobileService {
 
 	@Override
 	public List<Mobile> getAllProduct() {
-		logger.info("Mobile service implementation to get all the mobile details");
+		logger.info("All Successful transactions");
 		return this.mobileRepository.findAll();
 
 	}

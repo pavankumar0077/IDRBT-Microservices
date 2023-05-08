@@ -61,7 +61,7 @@ public class MobileController {
 			@ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
 	@GetMapping(value = "/mobile", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Mobile>> getAllMobiles() {
-		logger.info("Successful payment");
+		logger.info("Getting all transactions status details");
 		return ResponseEntity.ok().body(mobileService.getAllProduct());
 	}
 
@@ -94,7 +94,7 @@ public class MobileController {
 	@PostMapping("/mobile")
 	public ResponseEntity<Mobile> createProduct(@RequestBody Mobile mobile) {
 		mobile.setId(sequenceGeneratorService.generateSequence(Mobile.SEQUENCE_NAME));
-		logger.info("Transaction is in progress");
+		logger.info("Transaction successful");
 		return ResponseEntity.ok().body(this.mobileService.createNewMobile(mobile));
 
 	}
